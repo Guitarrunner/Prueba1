@@ -1,0 +1,14 @@
+.container{
+  margin-left: 0;
+}
+
+.map{
+  left: -150px;
+  width: 690px;
+}
+
+.medidas{
+  left: 900px;
+  width: 200px;
+  top: -630px;
+}

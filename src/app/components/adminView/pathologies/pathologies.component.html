@@ -1,0 +1,112 @@
+<head>
+
+</head>
+
+
+
+<div id="content" #content>
+
+  <h3>Patologías</h3>
+  <table class="table table-hover table-striped"  data-pagination="true" id="makeEditable">
+     <thead>
+        <tr>
+          <th scope="col">N°</th>
+           <th scope="col">Nombre</th>
+           <th scope="col">Descripción</th>
+           <th scope="col">Síntomas</th>
+           <th scope="col">Tratamiento</th>
+           <th scope="col">Editar/Eliminar</th>
+        </tr>
+     </thead>
+     <tbody>
+         
+      <tr *ngFor="let item of pathologiesList">
+        <th scope="row">{{ item.idPatologia }}</th>
+        <td>{{ item.nombrePatologia }}</td>
+        <td>{{ item.descripcion }}</td>
+        <td>{{ item.sintomas }}</td>
+        <td>{{ item.tratamiento }}</td>
+        <td><a  data-toggle="modal" href="#" id="getModifyData" data-target="#edit" class="editTable">Editar</a>
+         <a  data-toggle="modal" href="#" id="getDeleteData" data-target="#delete" >Eliminar</a>
+       </td>
+     </tr>
+     </tbody>
+  </table>
+
+ <button class="btn btn-dark" data-toggle="modal" data-target="#create" >Agregar patología</button>
+  
+</div>
+
+<!--Modal para crear una nueva patologia-->
+<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Agregar Patología</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <app-create-pathology></app-create-pathology>
+      </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+         <button type="button" class="btn btn-primary" data-dismiss="modal" id="sendCreatedPathology"  >Agregar</button>
+       </div>
+     </div>
+   </div>
+ </div>
+
+
+ <!--Modal para modificar una nueva patologia-->
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Editar Patología</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <app-modify-pathology></app-modify-pathology>
+      </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+         <button type="button" class="btn btn-primary" data-dismiss="modal" id="sendModifiedPathology" >Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!--Modal para eliminar una nueva patologia-->
+ <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar patologia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" role="alert">
+          ¿Está seguro?
+        </div>
+     </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="deleteHospital" >Eliminar</button>
+     </div>
+   </div>
+ </div>
+</div>   
+
+
+
+
+   
+
+   
+

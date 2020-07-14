@@ -1,0 +1,46 @@
+<div class="nav d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 shadow-sm">
+  <h5 class="my-0 mr-md-auto fg font-weight-strong">
+    CoTEC-2020
+  </h5>
+  <nav class="my-2 my-md-0 mr-md-3 navBar">
+
+    <div class="row">
+    <div class="dropdown extra menus">
+      <button class="btn btn-secondary dropdown-toggle menus" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Administracion
+      </button>
+      <div class="dropdown-menu menus" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item menus" type="button" routerLink="/regions">Gestion de Regiones</button>
+        <button class="dropdown-item menus" type="button" routerLink="/pathologies">Gestion de Patologias</button>
+        <button class="dropdown-item menus" type="button" routerLink="/patientState">Gestion de Estados de Pacientes</button>
+        <button class="dropdown-item menus" type="button" routerLink="/hospitalCenter">Gestion de Centros Hospitalarios</button>
+      </div>
+    </div>
+
+    <div>
+      <a class="btn btn-primary menus"  routerLink="/general" routerLinkActive="router-link-active">
+        General
+      </a>
+    </div>
+
+    <div class="dropdown extra">
+      <button class="btn btn-secondary dropdown-toggle menus" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Centro hospitalario
+      </button>
+      <div class="dropdown-menu menus" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item menus" routerLink="/patient">Gestión de Paciente</a>
+        <a class="dropdown-item menus" routerLink="/recentContacts">Gestión de Ultimos Contactos por Paciente</a>
+        <a class="dropdown-item menus" routerLink="/reports">Reportes</a>
+      </div>
+    </div>
+    <div>
+      <!-- <a class="btn btn-primary btn-register" [routerLink]="'/register'">Sign up</a> -->
+      <a class="btn btn-outline-secondary btn-register"  routerLink="/login">Login</a>
+    </div>
+  </div>
+  
+  </nav>
+
+
+
+</div>

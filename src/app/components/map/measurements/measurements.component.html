@@ -1,0 +1,16 @@
+<div class="card medidas">
+  <div class="card-header">
+    <strong>Medidas de contención</strong></div>
+
+  <div class="card-body medidas">
+    <div *ngIf="medidas.length === 0" class="alert alert-info">No hay medidas tomadas.</div>
+
+  <ul *ngIf="medidas.length > 0" class="list-group">
+    <li class="list-group-item" *ngFor="let item of medidas">
+      {{item}}
+    </li>
+  </ul>
+  </div>
+</div>
+
+

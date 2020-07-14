@@ -1,0 +1,101 @@
+<div id="content" #content>
+
+    <h3>Regiones</h3>
+    <table class="table">
+       <thead>
+          <tr>
+             <th scope="col">N°</th>
+             <th style="display:none;" scope="col">id</th>
+             <th scope="col">País</th>
+             <th scope="col">Distrito</th>
+             <th scope="col">Canton</th>
+             <th scope="col">Provincia</th>
+             <th scope="col">Editar/Eliminar</th>
+          </tr>
+       </thead>
+       <tbody>
+  
+          <tr *ngFor="let item of regionsList">
+             <th scope="row">{{ item.idLugar }}</th>
+             <td style="display:none;">{{item.idLugar}}</td>
+             <td>{{ item.pais }}</td>
+             <td>{{ item.distrito }}</td>
+             <td>{{ item.canton }}</td>
+             <td>{{ item.provincia }}</td>
+             <td><a  data-toggle="modal" id="getModifyData" href="#" data-target="#edit" class="editTable">Editar</a>
+              <a  data-toggle="modal" id="getDeleteData" href="#" data-target="#delete" >Eliminar</a>
+            </td>
+          </tr>
+       </tbody>
+    </table>
+    <button class="btn btn-dark" data-toggle="modal" data-target="#create">Agregar región</button>
+  </div>
+  
+  <!--Modal para crear una nueva region-->
+  <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Agregar Patología</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <app-create-region></app-create-region>
+        </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+           <button type="submit" class="btn btn-primary" id="sendCreatedRegion"  data-dismiss="modal">Agregar</button>
+         </div>
+       </div>
+     </div>
+   </div>
+  
+  
+   <!--Modal para modificar una region-->
+  <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Editar Patología</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <app-modify-region></app-modify-region>
+        </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+           <button type="button" class="btn btn-primary" id="sendModifiedRegion" data-dismiss="modal" >Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--Modal para eliminar una region-->
+  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Eliminar patologia</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <div class="alert alert-danger" role="alert">
+             ¿Está seguro?
+           </div>
+        </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+           <button type="button" class="btn btn-primary" id="deleteRegion" data-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+   </div>   
+   
+  
+  

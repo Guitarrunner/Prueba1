@@ -1,0 +1,111 @@
+
+<div id="content" #content>
+
+    <h3>Contactos Recientes</h3>
+    <table class="table">
+       <thead>
+          <tr>
+            <th scope="col">N°</th>
+             <th scope="col">Nombre</th>
+             <th scope="col">Apellido</th>
+             <th scope="col">Nº Identificación</th>
+             <th scope="col">Edad</th>
+             <th scope="col">Nacionalidad</th>
+             <th scope="col">Dirección</th>
+             <th scope="col">Patologías</th>
+             <th scope="col">email</th>
+             <th scope="col">Editar/Eliminar</th>
+
+             
+          </tr>
+       </thead>
+       <tbody>
+  
+          <tr *ngFor="let item of contactsList">
+             <th scope="row">{{ item.idContacto }}</th>
+             <td>{{ item.nombreContacto }}</td>
+             <td>{{ item.apellidos }}</td>
+             <td>{{ item.id }}</td>
+             <td>{{ item.edad }}</td>
+             <td>{{ item.nacionalidad }}</td>
+             <td>{{ item.direccion }}</td>
+             <td>{{ item.patologias }}</td>
+             <td>{{ item.email }}</td>
+             <td><a  data-toggle="modal" id="getModifyData" href="#" data-target="#edit" class="editTable">Editar</a>
+               <a  data-toggle="modal" id="getDeleteData" href="#" data-target="#delete" >Eliminar</a>
+             </td>
+  
+          </tr>
+       </tbody>
+    </table>
+    <button class="btn btn-dark" data-toggle="modal" data-target="#create">Agregar Contacto</button>
+  </div>
+
+  
+<!--Modal para crear una nueva patologia-->
+<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Agregar Contacto Reciente</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <app-create-contact></app-create-contact>
+      </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+         <button type="button" class="btn btn-primary" id="sendCreatedContact"  data-dismiss="modal">Agregar</button>
+       </div>
+     </div>
+   </div>
+ </div>
+
+
+ <!--Modal para modificar una nueva patologia-->
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Editar Patología</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <app-modify-contacts></app-modify-contacts>
+      </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+         <button type="button" class="btn btn-primary" id="sendModifiedContact" data-dismiss="modal">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!--Modal para eliminar una nueva patologia-->
+ <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar patologia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" role="alert">
+          ¿Está seguro?
+        </div>
+     </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="deleteContact" data-dismiss="modal">Eliminar</button>
+     </div>
+   </div>
+ </div>
+</div>   
+
+

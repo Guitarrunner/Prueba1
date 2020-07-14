@@ -1,0 +1,17 @@
+.medidas{
+  width: 300px;
+  height: 600px;
+  color: white;
+  background-color: #3F5E5A;
+}
+
+.card-header{
+  text-align: center;
+  background-color: #38423B;
+  color: #20FC8F;
+}
+
+.list-group-item {
+  color: white;
+  background-color:  #3F5E5A;
+}

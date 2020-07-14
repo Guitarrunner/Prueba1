@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="row">   
+      <div class="col-sm">
+        <form>
+            <div class="form-group">
+              <label for="name">Nombre del paciente</label>
+              <input class="form-control" id="name" >
+            </div>
+
+            <div class="form-group">
+                <label for="apellidos">Apellidos del paciente</label>
+                <input class="form-control" id="lastName" >
+            </div>
+
+            <div class="form-group">
+                <label for="id">Número de identificación</label>
+                <input class="form-control" id="id" >
+            </div>  
+            
+            <div class="form-group">
+                <label for="edad">Edad</label>
+                <input class="form-control" id="age" >
+                
+            </div>
+            
+            <div class="form-group">
+                <label for="id">Nacionalidad</label>
+                <input class="form-control" id="nationality" >
+            </div>
+
+            <div class="form-group">
+              <label for="region">Región</label>
+              <select multiple class="form-control" id="regions" >
+                <option *ngFor="let item of regionsList">
+                {{item.region}}
+                </option>
+              </select>
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="pathology">Patologías</label>
+              <select multiple class="form-control" id="pathologies" >
+                <option *ngFor="let item of pathologiesList">
+                {{item.name}}
+                </option>
+              </select>
+            </div>
+            
+            
+            <div class="form-group">
+              <label for="state">Estado</label>
+              <select multiple class="form-control" id="states" >
+                <option *ngFor="let item of statesList">
+                {{item.state}}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="id">Medicación</label>
+              <input class="form-control" id="medication" >
+            </div>
+          
+            
+            <div class="form-group">
+              <label for="state">Internado</label>
+              <select class="form-control" id="intern" >
+                <option >Sí</option>
+                <option >No</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="state">UCI</label>
+              <select class="form-control" id="uci" >
+                <option >Sí</option>
+                <option >No</option>
+              </select>
+            </div>
+        </form>
+      </div>
+      <div class="col-sm">
+       
+      </div>
+     
+    </div>
+  </div>
