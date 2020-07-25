@@ -1,0 +1,153 @@
+CREATE PROCEDURE Contagiados @Pais varchar(30)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	IF @Pais = (SELECT Pais FROM REPORTES_ESTADOS WHERE  REPORTES_ESTADOS.Pais = @Pais)
+	BEGIN
+	UPDATE REPORTES_ESTADOS
+	SET Contagiados = Contagiados +1,
+		Activos = Activos+1
+	WHERE REPORTES_ESTADOS.Pais=@Pais
+	UPDATE REPORTES_ESTADOS
+	SET Contagiados = Contagiados +1,
+		Activos = Activos+1
+	WHERE REPORTES_ESTADOS.Pais='Total'
+	END;
+
+	ELSE 
+	INSERT INTO REPORTES_ESTADOS(Pais, Contagiados, Recuperados, Activos, Muertos)
+	VALUES (@Pais,1,0,1,0)
+	UPDATE REPORTES_ESTADOS
+	SET Contagiados = Contagiados +1,
+		Activos = Activos+1
+	WHERE REPORTES_ESTADOS.Pais='Total'
+
+END;
+Go;
+CREATE PROCEDURE Recuperados @Pais varchar(30)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	UPDATE REPORTES_ESTADOS
+	SET Activos = Activos -1,
+		Recuperados = Recuperados+1
+	WHERE REPORTES_ESTADOS.Pais=@Pais
+	UPDATE REPORTES_ESTADOS
+	SET Activos = Activos -1,
+		Recuperados = Recuperados+1
+	WHERE REPORTES_ESTADOS.Pais='Total';
+END;
+GO;
+CREATE PROCEDURE Muertos @Pais varchar(30)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	UPDATE REPORTES_ESTADOS
+	SET Activos = Activos -1,
+		Muertos = Muertos+1
+	WHERE REPORTES_ESTADOS.Pais=@Pais
+	UPDATE REPORTES_ESTADOS
+	SET Activos = Activos -1,
+		Muertos = Muertos+1
+	WHERE REPORTES_ESTADOS.Pais='Total';
+END;
+GO;
+CREATE TRIGGER Nuevo_caso
+    ON PACIENTE
+    AFTER INSERT
+    AS
+
+            BEGIN
+				DECLARE @Pais varchar(50)
+				SELECT @Pais= Pais from inserted
+				EXEC Contagiados @Pais
+                ROLLBACK TRANSACTION
+                RETURN
+            END;
+GO;
+
+CREATE TRIGGER Caso_Modificado
+    ON PACIENTE
+    AFTER UPDATE
+    AS
+	DECLARE @Estado varchar(50)
+	SELECT @Estado= Estado from inserted
+	DECLARE @Pais varchar(50)
+	SELECT @Pais= Pais from inserted
+		IF (@Estado = 'Muerto')
+            BEGIN
+			EXEC Muertos @Pais
+                RETURN
+	    END;
+
+		IF (@Estado = 'Recuperado')
+            BEGIN
+				EXEC Recuperados @Pais
+                RETURN
+            END;
+CREATE PROCEDURE ReporteCasoNuevo @Pais varchar(50), @fecha date
+AS
+BEGIN
+	SET NOCOUNT ON;
+	IF @fecha = (SELECT Fecha FROM REPORTES_CASOS WHERE  REPORTES_CASOS.Pais = @Pais) 
+	UPDATE REPORTES_CASOS
+	SET CasosNuevos = CasosNuevos +1
+	WHERE REPORTES_CASOS.Pais=@Pais 
+	ELSE 
+	INSERT INTO REPORTES_CASOS(Pais, Fecha, CasosNuevos, Muertes)
+	VALUES (@Pais,@fecha,1,0)
+END; 
+GO;
+CREATE PROCEDURE ReporteMuerteNueva @Pais varchar(50), @fecha date
+AS
+BEGIN
+	SET NOCOUNT ON;
+	IF @fecha = (SELECT Fecha FROM REPORTES_CASOS WHERE  REPORTES_CASOS.Pais = @Pais) 
+	UPDATE REPORTES_CASOS
+	SET Muertes = Muertes +1
+	WHERE REPORTES_CASOS.Pais=@Pais 
+	ELSE 
+	INSERT INTO REPORTES_CASOS(Pais, Fecha, CasosNuevos, Muertes)
+	VALUES (@Pais,@fecha,0,1)
+END; 
+
+
+GO;
+CREATE TRIGGER MuerteNueva
+    ON PACIENTE
+    AFTER UPDATE
+    AS
+	DECLARE @Estado varchar(50)
+	SELECT @Estado= Estado from inserted
+	DECLARE @P varchar(50)
+	SELECT @P= Pais from inserted
+		IF (@Estado = 'Muerto' )
+            BEGIN
+			Declare @d as date
+			SET @d = GETDATE()
+			EXEC ReporteMuerteNueva @Pais=@P, @fecha= @d
+                RETURN
+			END;
+CREATE TRIGGER NuevoCaso
+    ON PACIENTE
+    AFTER INSERT
+    AS
+	DECLARE @Estado varchar(50)
+	SELECT @Estado= Estado from inserted
+	DECLARE @IPais varchar(50)
+	SELECT @IPais =Pais from inserted
+		BEGIN
+			Declare @d as date
+			SET @d = GETDATE()
+			EXEC ReporteCasoNuevo @Pais= @IPais, @fecha= @d
+                RETURN
+			END;
+GO;
+CREATE PROCEDURE UltimosDias @date date
+AS
+BEGIN
+	SELECT REPORTES_CASOS.Muertes, REPORTES_CASOS.CasosNuevos
+	FROM REPORTES_CASOS
+	WHERE REPORTES_CASOS.Fecha = @date
+END;
+
